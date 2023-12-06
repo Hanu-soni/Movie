@@ -4,36 +4,43 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./movies.css";
 import { useSelector } from "react-redux";
-import https from 'http';
 const Movies = () => {
   const [movies, Setmovies] = useState([]);
 
   // using useeffect
   const SearchData = useSelector((state) => state.search);
 
-  const axiosInstance = axios.create({
-    baseURL: 'https://localhost:8080',
-    httpsAgent: new https.Agent({  
-      rejectUnauthorized: false  // Add this line to disable SSL verification
-    })
-  });
+  
   
   const adddata = (title, img, date) => {
-    const apiUrl = '/add'; // Relative path to avoid CORS issues
+    // const apiUrl = '/add'; // Relative path to avoid CORS issues
   
-    const data = {
-      param1: title,
-      param2: img,
-      param3: date
+    const data1 = {
+      title: title,
+      img: img,
+      date: date
     };
-  
-    axiosInstance.post(apiUrl, data)
-      .then(response => {
-        console.log('API call successful:', response.data);
-      })
-      .catch(error => {
-        console.error('API call failed:', error);
-      });
+    console.log(data1);
+    const data=JSON.stringify(data1);
+    console.log(data);
+    if (data) {
+      axios
+        .post(
+          `http://localhost:8080/add`,
+          data,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   
