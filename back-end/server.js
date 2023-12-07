@@ -14,7 +14,7 @@ app.get('/getFav', (req,res)=>{
       } else {
         res.send({
             message:" Added to favourite ",
-            success:true
+            data:result
         });
       }
     });
@@ -39,6 +39,23 @@ app.post('/add', (req, res) => {
       }
     });
   });
+
+
+app.delete('/delete/:id',(req,res)=>{
+  const id=req.params.id;
+  con.query(`DELETE FROM movieslist WHERE title = ?`, [id], (err, result) => {
+    if (err) {
+      console.error('Error inserting into movieslist table:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      res.send({
+          message:" deleted from favourite ",
+          success:true
+      });
+    }
+  });
+
+})
   
 
 

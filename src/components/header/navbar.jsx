@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { getData } from "../Redux/reducers";
 import "./navbar.css"; // for the styling
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
 
   // this function will moniter all the changes
   let timer;
@@ -19,6 +21,9 @@ const Navbar = () => {
       dispatch(getData(inputValue));
     }, 500);
   };
+  function Gotofav(){
+    navigate('/fav');
+  }
 
   return (
     <div style={{marginTop:"20px"}}  className="d-flex align-items-center justify-content-center gap-4">
@@ -32,9 +37,9 @@ const Navbar = () => {
           placeholder="Search Movies"
           onChange={handleChange}
         />
-        <button className="custom-button">
-          Show Fav
-        </button>
+       
+        
+        
       
     </div>
   );

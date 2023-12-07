@@ -4,11 +4,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./movies.css";
 import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 const Movies = () => {
   const [movies, Setmovies] = useState([]);
 
   // using useeffect
   const SearchData = useSelector((state) => state.search);
+  const navigate=useNavigate();
+  
 
   
   
@@ -36,6 +39,9 @@ const Movies = () => {
         )
         .then((res) => {
           console.log(res);
+          if(res.data.success===true){
+              console.log("Execute the get axios")
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -79,6 +85,12 @@ const Movies = () => {
     }
   }, [SearchData]);
   console.log(movies);
+
+
+
+  function Gotofav(){
+    navigate('/fav');
+  }
   return (
     <div className="parent">
       {movies?.map((movie) => (
@@ -102,6 +114,7 @@ const Movies = () => {
             
         </div>
       ))}
+      <button onClick={Gotofav}>Show Fav</button>
     </div>
   );
 };
