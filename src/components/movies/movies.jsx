@@ -10,7 +10,7 @@ const Movies = () => {
 
   // using useeffect
   const SearchData = useSelector((state) => state.search);
-  const navigate=useNavigate();
+
   
 
   
@@ -88,11 +88,14 @@ const Movies = () => {
 
 
 
-  function Gotofav(){
-    navigate('/fav');
-  }
+  
   return (
+
+    <div style={{marginTop:"10px"}}>
+      
     <div className="parent">
+      
+      
       {movies?.map((movie) => (
         // <div className="card" key={movie.id}>
         //   <img
@@ -114,7 +117,8 @@ const Movies = () => {
             
         </div>
       ))}
-      <button onClick={Gotofav}>Show Fav</button>
+      
+    </div>
     </div>
   );
 };
