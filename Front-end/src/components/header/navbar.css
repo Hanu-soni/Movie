@@ -52,7 +52,14 @@ input:focus {
 /* mobile size */
 @media (max-width: 600px) {
   div {
-    flex-direction: column;
+    flex-direction: column; 
+  }
+  button{
+    height:"10px";
+    width:"10px"
+  }
+  .main{
+    margin-top:50px;
   }
   input::placeholder {
     text-align: center;

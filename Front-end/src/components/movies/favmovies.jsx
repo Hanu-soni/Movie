@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Favmovies = () => {
+
+  //this variable stores the data get from back-end on  **GET**-api call when page
+  //loads
   const [data, setData] = useState([]);
   const navigate=useNavigate();
 
@@ -26,6 +29,8 @@ const Favmovies = () => {
 
     fetchData();
   }, []); // Empty dependency array means this effect runs once after the initial render
+
+  //This function is called on "delete button". here, an api **DELETE** called when user deletes a movie from fav-list
   function deletefunc(title){
     const response=axios.delete(`http://localhost:8080/delete/${title}`)
     console.log("hello");
@@ -37,6 +42,7 @@ const Favmovies = () => {
     // }
 
   }
+  //There is button Goback onClick , will navigate to page-1
   function Goback(){
     navigate('/MoviesList')
   }
@@ -46,6 +52,9 @@ const Favmovies = () => {
       {/* Render your data here */}
       <center style={{marginTop:"10px"}}><button onClick={Goback} className='btn btn-primary'>Go Back</button></center>
       <div className='gap-5 pt-3 d-flex justify-content-center align-items-center flex-column'>
+      
+      {/* Mapping the data got from mysql-db in table "movies" and listing item.date,title
+      and image which will save space in real time scenrio */}
       {data.map((item) => (
          <div class="card gap-4 mt-3" style={{width:"28rem",height:"25rem"}}>
          <img className="img-fluid card-img-top" src={`https://image.tmdb.org/t/p/w500${item.img}`} style={{height:"15rem",width:"40rem"}}  alt="..."/>
